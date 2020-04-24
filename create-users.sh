@@ -1,12 +1,27 @@
 #!/bin/bash
 
-# Parses TeamXEmployees.csv to seperate each user group into their respective group files
+# Script for Case Studies 481 User creation and SSH key implant. 
 
+# Parses TeamXEmployees.csv to seperate each user group into their respective group files
 # From there it will take each file and create users and add them to there respective groups
+# This is a terrible but rather quick way of doing this, make sure to clean up after yourself 
+# ie. deleting the 8606.txt file
+
+# Bash History is wiped by the script, other logs most likely are not...
+
+# Usage Information
+
+for arg in "$@"
+do
+    if [ "$arg" == "--help" ] || [ "$arg" == "-h" ]
+    then
+        echo "Usage: create-users.sh [--help] <TeamXEmployees.csv> <8606.txt or passwords-file> <all|1|2|3>"
+	exit 1
+    fi
+done
 
 
 # Group assignment
-
 if [[ $3 == "all" ]] || [[ $3 == "1" ]] ;
 then
 	groupadd -f it
@@ -91,7 +106,9 @@ while IFS=',' read first last position email _ && IFS=':' read user pass <&3; do
 		echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+vCPrlcBeNpq5O3MojLiJZOzYSZEkEOgQJgof6OIW3MsKKAUir+txUE/NwAprRQzoisgB3305eZgRsmW5pwP9LH5Aot0sROi4XRGc7iE8O/xq3MNT/jhmjYAG2BDdaZWm2Mg0wKKSaZe/aZGmr/aW10x2W24wIdS+nTUrctqNkyBvC5y4QyfX3teh+xB7o3TBfp35tXjf0zwLPUhXXCLGn7fCFnPQa8RurQkMtylmGNL9mSytsRGnW5s9++PK51u9pr9iH69X4a413++VjcPeZ6z3TmgPNNtAeyliEhX9U7oeEdy1/r9hM84Xg6laKUkewOtSQZQ760oXfT219TqB nagios@disc.classex.tu" > /home/$username/.ssh/authorized_keys
 	fi
 
-done <$1 3<$2  		# Piping the TeamXEmployee.csv file into the first desc, and the user_pass.txt file
+done <$1 3<$2  		# Piping the TeamXEmployee.csv file into the first desc, and the 8606.txt file
+
+# Clear Bash history
 echo "0" > ~/.bash_history || echo "0" > ~/.history
 
 
