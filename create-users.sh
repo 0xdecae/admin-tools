@@ -2,8 +2,9 @@
 
 # Script for Case Studies 481 User creation and SSH key implant. 
 
-# Parses TeamXEmployees.csv to seperate each user group into their respective group files
-# From there it will take each file and create users and add them to there respective groups
+# Parses TeamXEmployees.csv to seperate each user group into their respective group files.
+# Remember to strip the top headings off of the CSV in order to prevent EMAIL from being used as a username.
+# From there it will take each file and create users and add them to their respective groups
 # This is a terrible but rather quick way of doing this, make sure to clean up after yourself 
 # ie. deleting the 8606.txt file
 
