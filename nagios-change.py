@@ -11,7 +11,7 @@ s = requests.Session()
 password = raw_input("password: ")
 
 
-team = 5
+team = 5    # Change me
 data =    {
     "password" : password,
     "team" : team
@@ -27,7 +27,7 @@ r = s.post(url, verify=False,
             'team' : team})
 print(r.text)
 reader =csv.reader(
-        open("8606.txt"), delimiter=":"
+        open("user-pass.txt"), delimiter=":"
         )
 for row in reader:
     user = row[0] 
